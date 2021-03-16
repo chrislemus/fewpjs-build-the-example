@@ -8,15 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // const mediaPosts = document.querySelectorAll('.media-post')
   const PostsLikeBtns = document.querySelectorAll('.like')
 
-  modal.hidden = true
-
-  // mimicServerCall()
-  // .then(res => res.json())
-  // .then(likes => likes.map(like => like.postId))
-  // .then(postIds => postIds.forEach(id => {
-  //   const post = document.getElementById(id)
-  //   if(post) updateHeart(post);
-  // }))
 
   function updateHeart(heartParentNode) {
     const likeHeart = heartParentNode.querySelector('.like-glyph')
@@ -42,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: { 'Content-Type': 'application/json' },
         // body: JSON.stringify({postId})
       }
-      mimicServerCall("http://mimicServer.example.com", config)
+      mimicServerCall()
       .then(res => updateHeart(likeBtn))
       .catch(err => {
-        modal.hidden = false
+        modal.classList.remove('hidden')
         modal.querySelector('#modal-message').innerHTML = err
         setTimeout(() => {
-          modal.hidden = true
+          modal.classList.add('hidden')
         }, 5000)
       })
     })
